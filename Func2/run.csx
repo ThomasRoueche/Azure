@@ -1,6 +1,7 @@
+#r "System.ServiceModel"
+
 using System.Net;
 using System.Xml;
-using System.ServiceModel;
 
 public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceWriter log)
 {
