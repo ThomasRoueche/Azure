@@ -1,6 +1,6 @@
 using System.Net;
 using System.Xml;
-using System.ServiceModel.Syndication;
+using System.ServiceModel;
 
 public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceWriter log)
 {
