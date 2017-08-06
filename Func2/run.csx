@@ -1,4 +1,5 @@
 using System.Net;
+using System.Xml;
 using System.ServiceModel.Syndication;
 
 public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceWriter log)
