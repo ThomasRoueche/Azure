@@ -19,24 +19,22 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
     string url = "http://feeds.feedburner.com/nofrag_com";
     XmlReader reader = XmlReader.Create(url);
     
-//    XmlTextReader reader = new XmlTextReader(strURL);
-    DataSet ds = new DataSet();
-    ds.ReadXml(reader);
-
-    foreach (DataTable table in ds.Tables)
+    while (reader.Read())
     {
-        name = table.TableName;
+        if (reader.IsStartElement())
+        {
+            if (reader.IsEmptyElement)
+                Console.WriteLine("<{0}/>", reader.Name);
+            else
+            {
+                Console.Write("<{0}> ", reader.Name);
+                reader.Read(); // Read the start tag.
+                if (reader.IsStartElement())  // Handle nested elements.
+                    Console.Write("\r\n<{0}>", reader.Name);
+                Console.WriteLine(reader.ReadString());  //Read the text content of the element.
+            }
+        }
     }
-
-/*    SyndicationFeed feed = SyndicationFeed.Load(reader);
-    reader.Close();
-    foreach (SyndicationItem item in feed.Items)
-    {
-        name += " ";
-        name += item.Title.Text;
-    }
-*/
-
 
 
     return name == null
