@@ -1,5 +1,3 @@
-#r "System.ServiceModel"
-
 using System.Net;
 using System.Xml;
 
@@ -20,14 +18,24 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
 
     string url = "http://feeds.feedburner.com/nofrag_com";
     XmlReader reader = XmlReader.Create(url);
-    SyndicationFeed feed = SyndicationFeed.Load(reader);
+    
+//    XmlTextReader reader = new XmlTextReader(strURL);
+    DataSet ds = new DataSet();
+    ds.ReadXml(reader);
+
+    foreach (DataTable table in ds.Tables)
+    {
+        name = table.TableName;
+    }
+
+/*    SyndicationFeed feed = SyndicationFeed.Load(reader);
     reader.Close();
     foreach (SyndicationItem item in feed.Items)
     {
         name += " ";
         name += item.Title.Text;
     }
-
+*/
 
 
 
